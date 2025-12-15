@@ -188,7 +188,7 @@ def main():
     for ticker in args.tickers:
         try:
             data = fetch_data(ticker, start_date, end_date)
-            prices = data["Close"].squeeze()
+            prices = data["Close"]
             metrics = calculate_metrics(prices, ticker)
             results.append(metrics)
             price_data[ticker] = prices
@@ -200,7 +200,7 @@ def main():
         try:
             index_ticker = INDEX_MAPPING[args.index]
             data = fetch_data(index_ticker, start_date, end_date)
-            prices = data["Close"].squeeze()
+            prices = data["Close"]
             metrics = calculate_metrics(prices, args.index)
             results.append(metrics)
             price_data[args.index] = prices
@@ -218,7 +218,10 @@ def main():
     save_csv(results, args.output_dir, args.start, args.end)
 
     # Generate chart
-    generate_chart(price_data, args.output_dir, args.start, args.end)
+    if price_data:
+        generate_chart(price_data, args.output_dir, args.start, args.end)
+    else:
+        print("No price data available to generate chart.")
 
     print("Backtest complete!")
 
