@@ -11,7 +11,42 @@ A Python CLI tool to backtest stock performance against market indices over cust
 - Generates normalized performance charts
 - Exports results to CSV
 
-## Installation
+## Quick Start (One-Click Setup)
+
+**No technical knowledge required!** Just run one simple command:
+
+### For Mac/Linux:
+```bash
+./run.sh
+```
+
+### For Windows:
+```batch
+run.bat
+```
+
+**That's it!** The script will:
+- ✓ Check if Python is installed
+- ✓ Create a virtual environment automatically
+- ✓ Install all required libraries
+- ✓ Launch an interactive menu to guide you through your backtest
+
+### First Time Setup
+
+1. Download or clone this repository
+2. Open Terminal (Mac/Linux) or Command Prompt (Windows)
+3. Navigate to the Backtester folder
+4. Run the command above for your operating system
+
+The interactive launcher will ask you simple questions:
+- Which stock(s) do you want to analyze?
+- What time period? (start year and end year)
+- Compare against a market index? (optional)
+- Where to save results? (optional)
+
+## Advanced Usage (For Technical Users)
+
+### Manual Installation
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/Backtester.git
@@ -21,7 +56,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Usage
+### Command-Line Usage
 
 ```bash
 # Single stock
