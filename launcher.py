@@ -4,6 +4,7 @@ Interactive launcher for Stock Backtester
 Makes it easy for non-technical users to run backtests
 """
 
+import os
 import sys
 import subprocess
 from datetime import datetime
@@ -165,11 +166,14 @@ def confirm_and_run(tickers, start_year, end_year, index, output_dir):
 
         # Run backtester
         try:
-            subprocess.run(cmd, check=True)
+            # Get the directory where this launcher script is located
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            subprocess.run(cmd, check=True, cwd=script_dir)
             print("\n" + "=" * 60)
             print("SUCCESS!")
             print("=" * 60)
-            print(f"\nYour results are saved in the '{output_dir}' directory.")
+            output_path = os.path.join(script_dir, output_dir)
+            print(f"\nYour results are saved in: {output_path}")
             print("  - CSV file with metrics")
             print("  - PNG chart showing performance")
             print("\nThank you for using Stock Backtester!")
