@@ -3,6 +3,8 @@
 Stock Backtester - Compare stock performance against market indices.
 """
 
+from __future__ import annotations
+
 import argparse
 import os
 from datetime import datetime
@@ -158,6 +160,11 @@ def generate_chart(
 
 def main():
     args = parse_args()
+
+    # Validate date range
+    if args.start > args.end:
+        print(f"Error: Start year ({args.start}) must be less than or equal to end year ({args.end})")
+        return
 
     # Build date range
     start_date = f"{args.start}-01-01"
