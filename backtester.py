@@ -81,8 +81,8 @@ def calculate_metrics(prices: pd.Series, name: str) -> dict:
     # Total return
     total_return = (prices.iloc[-1] / prices.iloc[0] - 1) * 100
 
-    # Annualized return
-    years = len(prices) / 252  # Trading days per year
+    # Annualized return (using actual calendar days)
+    years = (prices.index[-1] - prices.index[0]).days / 365.25
     annualized_return = ((1 + total_return / 100) ** (1 / years) - 1) * 100
 
     # Volatility (annualized)
