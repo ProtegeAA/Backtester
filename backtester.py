@@ -190,6 +190,8 @@ def main():
         try:
             data = fetch_data(ticker, start_date, end_date)
             prices = data["Close"]
+            if isinstance(prices, pd.DataFrame):
+                prices = prices.iloc[:, 0]
             metrics = calculate_metrics(prices, ticker)
             results.append(metrics)
             price_data[ticker] = prices
@@ -202,6 +204,8 @@ def main():
             index_ticker = INDEX_MAPPING[args.index]
             data = fetch_data(index_ticker, start_date, end_date)
             prices = data["Close"]
+            if isinstance(prices, pd.DataFrame):
+                prices = prices.iloc[:, 0]
             metrics = calculate_metrics(prices, args.index)
             results.append(metrics)
             price_data[args.index] = prices
