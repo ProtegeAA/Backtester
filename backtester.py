@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import sys
 from datetime import datetime
 
 import matplotlib.pyplot as plt
@@ -68,7 +69,7 @@ def fetch_data(ticker: str, start_date: str, end_date: str) -> pd.DataFrame:
     """Fetch historical price data for a ticker."""
     print(f"Fetching data for {ticker}...")
     data = yf.download(ticker, start=start_date, end=end_date, progress=False)
-    if data.empty:
+    if len(data) == 0:
         raise ValueError(f"No data found for {ticker}")
     return data
 
@@ -209,7 +210,7 @@ def main():
 
     if not results:
         print("No data to analyze. Exiting.")
-        return
+        sys.exit(1)
 
     # Display results
     display_results(results)
