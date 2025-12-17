@@ -146,10 +146,13 @@ def confirm_and_run(tickers, start_year, end_year, index, output_dir):
     confirm = input("Run backtest with these settings? (Y/n): ").strip().lower()
 
     if confirm in ['', 'y', 'yes']:
-        # Build command
+        # Build command with absolute path to backtester.py
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        backtester_path = os.path.join(script_dir, "backtester.py")
+
         cmd = [
             sys.executable,
-            "backtester.py",
+            backtester_path,
             "--tickers"
         ] + tickers + [
             "--start", str(start_year),
@@ -166,8 +169,6 @@ def confirm_and_run(tickers, start_year, end_year, index, output_dir):
 
         # Run backtester
         try:
-            # Get the directory where this launcher script is located
-            script_dir = os.path.dirname(os.path.abspath(__file__))
             subprocess.run(cmd, check=True, cwd=script_dir)
             print("\n" + "=" * 60)
             print("SUCCESS!")
