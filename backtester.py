@@ -68,8 +68,8 @@ def parse_args():
 def fetch_data(ticker: str, start_date: str, end_date: str) -> pd.DataFrame:
     """Fetch historical price data for a ticker."""
     print(f"Fetching data for {ticker}...")
-    data = yf.download(ticker, start=start_date, end=end_date, progress=False)
-    if len(data) == 0:
+    data = yf.download(ticker, start=start_date, end=end_date, progress=False, auto_adjust=False)
+    if data.empty:
         raise ValueError(f"No data found for {ticker}")
     return data
 
